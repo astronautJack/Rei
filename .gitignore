@@ -1,0 +1,17 @@
+# opencode 运行时产物（不提交；配置目录 agents/commands/skills 仍提交）
+.opencode/sessions/
+.opencode/snapshots/
+.opencode/data/
+.opencode/cache/
+
+# Serena 本地项目配置（语言服务器路径，机器相关）
+.serena/
+
+# 编辑器/系统
+.DS_Store
+*.swp
+*~
+.vscode/
+.idea/
+
+# 注意：docs/avsession-access.md 只能留 <占位符>；真实 SSH 端口/主机/密钥、API token 严禁提交
