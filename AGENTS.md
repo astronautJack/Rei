@@ -1,40 +1,44 @@
-# Rei — 研发辅助 Agent 项目说明
+# Rei — 代码↔Wiki / 端到端 / BUG 定位 工具集
 
-本目录是团队研发辅助 agent 的工作区。目标：让 opencode 在任意同事机器上**冷启动**即可访问团队的三个 HarmonyOS 媒体相关源码仓库，无需手动下载、不依赖本地路径一致。
+基于 opencode，对**任意路径**的本地代码仓库 + 多级 markdown wiki 提供三条能力（详见 `方案设计.md`）：
 
-## 三个源码仓库
+1. 代码 → Wiki（`/wiki`）
+2. 需求端到端实现（`/feature`）
+3. BUG 定位（`/bug`）
 
-| 仓库 | 访问方式 | opencode 里的入口 |
-| --- | --- | --- |
-| multimedia_av_session（AVSession，开源） | 内网服务器 SSH 访问（公网 gitcode 在内网不可达） | 见 `docs/avsession-access.md`（已通过 `instructions` 自动加载） |
-| MediaPlaybackController（私有） | gitcode references 自动克隆 | `@media-playback-controller` |
-| scene_board_ext（私有） | gitcode references 自动克隆 | `@scene-board-ext` |
+## 成品接线（不自造轮子）
 
-### AVSession（avsession）
-音视频会话框架：媒体会话、控制器、投播等。**不在 references 中**——内网只能通过 SSH 访问极速空间服务器上的源码目录。访问步骤（端口、SSH 选项、user@host、服务器目录、代码目录）见 `docs/avsession-access.md`。agent 需要读 avsession 源码时，按该文件里的非交互 SSH 命令模板在服务器上 grep/cat/ls。
+| 角色 | 成品 | 形态 |
+|---|---|---|
+| 代码图 + 影响面 + wiki 生成 | **code-review-graph**（CRG） | CLI `code-review-graph`（`~/.local/bin/`），`--repo <target>` 任意路径 |
+| 上下文兜底压缩 | **opencode-dcp**（DCP） | 全局插件，自动；agent 无需调用 |
 
-### MediaPlaybackController
-HMOS 媒体播放控制器 hap。私有 gitcode 仓库，已配为 reference，用 `@media-playback-controller` 引用。跟踪**开发分支**（分支名待填，见 `opencode.jsonc`）。
+CRG 一身二任：当 **code_graph_review**（图 / blast-radius 影响面）+ 当 **DeepWiki**（`wiki` 子命令出 markdown wiki）。
 
-### scene_board_ext
-HarmonyOS 场景板扩展。私有 gitcode 仓库，已配为 reference，用 `@scene-board-ext` 引用。跟踪**开发分支**（分支名待填，见 `opencode.jsonc`）。
+## 核心思想
 
-## 冷启动前置准备（新同事必读）
+**先读 wiki 拿地图，再下钻代码。** wiki 是导航层（what/why），代码是真相层（how）。下钻用 CRG 的代码图引导只读相关文件；上下文快炸时 DCP 自动兜底压缩。
 
-1. **私有 gitcode 仓库**：确保本机 `git` 已配好 gitcode 凭证（SSH key，或 HTTPS token + `git config --global credential.helper store`）。配好后，`media-playback-controller`、`scene-board-ext` 两个 reference 会在 opencode 启动时自动克隆到本地缓存，用 `@alias` 即可访问，无需关心实际路径。
-2. **AVSession 内网访问**：按 `docs/avsession-access.md` 确认能 SSH 到极速空间服务器并 `cd` 到代码目录。
-3. **改完 `opencode.jsonc` / `AGENTS.md` / `docs/avsession-access.md` 后需重启 opencode** 才能生效（配置仅在启动时加载一次）。
+## 用法
 
-## 代码约定与构建/测试
+- 命令以绝对路径接任意目标仓：`/wiki /path/to/repo /path/to/wiki`。
+- CRG 常用子命令（都带 `--repo <R>`）：
+  - `build` 建图 / `update` 增量 / `status` 统计
+  - `detect-changes --brief` 影响面（reviewer/bug-tracer）
+  - `wiki` 出 markdown wiki（WF1）
+  - `visualize --format json` 导出全图（cartographer/planner）
+- CRG 不在 PATH 时用全路径 `$HOME/.local/bin/code-review-graph`。
+- 重复操作某仓：在该仓丢一个 mini `opencode.json`，设 `references.wiki` + `instructions` 指向该仓约定。
+- 改完 `.opencode/` 或 `opencode.json` 后**重启 opencode** 才生效（配置仅启动时加载一次）。
 
-> TODO：以下按 HarmonyOS 通用流程给出占位，团队确认后补充准确命令与 target。
+## 约定
 
-- AVSession（native）：gn + ninja 构建；具体 target 待确认。
-- MediaPlaybackController / scene_board_ext：按各仓 README 与构建脚本确认（hap 可能用 hvigor；native 部分用 gn/ninja）。
-- 提交前跑的 lint / 测试命令：TODO。
+- **不自动 commit/push**：agent 只产本地改动 + 变更说明，提交留给人。
+- **人在 loop**：`/feature` 有设计 + 提交两个硬检查点；`/bug` 报告供审、修复 opt-in；`/wiki` 覆盖前 diff 供审。
+- **wiki-writer 只在 wiki 根下写**，不碰仓库源码。
+- **CRG 副作用**：会在目标仓建 `.code-review-graph/`（图库 + 生成的 wiki）；建议加入该仓 `.gitignore`。
+- **经验沉淀进 wiki**，不灌本文件 / skills。
 
-## 工作约定
+## 模型配置
 
-- 优先用 `@alias` 引用 references 仓库，**不要**手动 `git clone` 到任意目录（路径会不一致，破坏冷启动一致性）。
-- avsession 只能通过 `docs/avsession-access.md` 里的 SSH 模板访问，不要尝试 `git clone` 公网 gitcode（内网不可达）。
-- 不要在 `opencode.jsonc` 里内嵌任何 token / 密钥 / 密码；凭证一律走本机 git / SSH 配置。
+`model` / `small_model` 由全局 opencode 配置提供（指向你的端点）。本仓 `opencode.json` 不写死模型。

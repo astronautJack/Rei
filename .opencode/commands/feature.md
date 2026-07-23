@@ -1,7 +1,8 @@
 ---
-description: 启动端到端特性开发流程。
+description: 需求端到端实现（WF2）。结合 wiki+CRG 图产出代码与文档。
 agent: dev
 ---
-按端到端特性流程处理需求：$ARGUMENTS
+按端到端流程实现需求：$ARGUMENTS
 
-流程：planner 定位+设计 → 🛑人审 → coder 实现 → reviewer 自审 → tester 门禁 → /stage 变更说明 → 🛑人审提交。
+用法：/feature <需求文本> [--repo <path>] [--wiki <path>]
+流程：planner 读 wiki+图出设计 → 🛑人审 → coder 实现 → reviewer 自审(+影响面) → tester 门禁 → wiki-writer 更新文档 → stage 变更说明 → 🛑人审提交。

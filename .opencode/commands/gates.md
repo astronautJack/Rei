@@ -1,5 +1,7 @@
 ---
-description: 跑 build/lint/typecheck/test 质量门禁。
+description: 跑质量门禁 build/lint/typecheck/test。
 agent: dev
 ---
-按 `harmony-build` skill 跑质量门禁（lint → typecheck → unit test → build），全绿才放行。
+跑质量门禁：$ARGUMENTS
+
+流程：tester 按仓自动发现命令，依次 lint → typecheck → unit test → build；失败交 coder 修复，循环至全绿。
