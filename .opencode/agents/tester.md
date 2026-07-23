@@ -17,7 +17,7 @@ permission:
 
 ## 任务
 
-按目标仓**自动发现**构建/测试命令（读 `package.json`/`build.gradle`/`CMakeLists`/`BUILD`/`Makefile` 等），依次跑：lint → typecheck（若有）→ unit test → build。失败 → 报错给 dev 回 coder 修复，循环至全绿。
+按目标仓**自动发现**构建/测试命令（读 `package.json`/`build.gradle`/`CMakeLists`/`BUILD`/`Makefile` 等），依次跑：lint → typecheck（若有）→ unit test → build。失败 → 报错给 rei 回 coder 修复，循环至全绿。
 
 ## 约束
 

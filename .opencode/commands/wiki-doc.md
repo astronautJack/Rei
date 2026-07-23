@@ -1,6 +1,6 @@
 ---
 description: 生成 DeepWiki 风格架构 wiki（读 CRG 结构页+下钻源码，写知识库级可读文档+mermaid）。
-agent: dev
+agent: rei
 ---
 为目标仓生成 DeepWiki 风格架构 wiki。
 

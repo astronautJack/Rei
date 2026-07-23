@@ -1,6 +1,6 @@
 ---
 description: 产出本地改动 + 变更说明（不提交）。
-agent: dev
+agent: rei
 ---
 产出本地改动 + 变更说明（不自动提交）：$ARGUMENTS
 

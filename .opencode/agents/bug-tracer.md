@@ -28,4 +28,4 @@ permission:
 
 - `edit: deny`，只读；只产报告，不修代码。
 - bash 仅 `git` 与 `code-review-graph`。
-- 报告交 dev → 🛑人审；修复 opt-in。
+- 报告交 rei → 🛑人审；修复 opt-in。

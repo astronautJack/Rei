@@ -101,7 +101,7 @@ opencode
 ```
 /feature 给 AVSession 加一个 X 功能，需要兼容历史接口 --repo /path/to/your-repo --wiki /path/to/your-repo/docs/wiki
 ```
-`dev` 会先出设计（🛑检查点1）→ 实现 → 自审+影响面 → 测试 → 更新 wiki → `stage`（🛑检查点2）。
+`rei` 会先出设计（🛑检查点1）→ 实现 → 自审+影响面 → 测试 → 更新 wiki → `stage`（🛑检查点2）。
 
 ### 3. 定位一个 BUG
 
@@ -127,12 +127,12 @@ opencode
 
 ```
 Rei/
-├── opencode.json          # 工具集配置（默认 agent=dev、权限、compaction）
+├── opencode.json          # 工具集配置（默认 agent=rei、权限、compaction）
 ├── AGENTS.md              # agent-facing 约定（成品表、用法、约束）
 ├── README.md              # 本文件（用户使用说明）
 ├── 方案设计.md            # 给人看的设计稿（成品接线/拓扑/三流/后续）
 ├── .opencode/
-│   ├── agents/            # dev / cartographer / wiki-writer / bug-tracer
+│   ├── agents/            # rei / cartographer / wiki-writer / bug-tracer
 │   │                      # / planner / coder / reviewer / tester（8 个）
 │   └── commands/          # /wiki-map / /wiki-doc / /feature / /bug
 │                          # / /review / /gates / /stage（7 个）

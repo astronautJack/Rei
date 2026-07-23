@@ -1,6 +1,6 @@
 ---
 description: 对当前改动跑自审。
-agent: dev
+agent: rei
 ---
 对当前工作区改动跑 reviewer 自审：$ARGUMENTS
 

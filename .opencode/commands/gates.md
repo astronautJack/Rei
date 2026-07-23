@@ -1,6 +1,6 @@
 ---
 description: 跑质量门禁 build/lint/typecheck/test。
-agent: dev
+agent: rei
 ---
 跑质量门禁：$ARGUMENTS
 

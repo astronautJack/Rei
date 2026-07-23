@@ -1,6 +1,6 @@
 ---
 description: BUG 定位（WF3）。结合 wiki + CRG 代码图定位根因。
-agent: dev
+agent: rei
 ---
 结合 wiki 与 CRG 代码图定位 BUG 根因。
 

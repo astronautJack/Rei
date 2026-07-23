@@ -25,5 +25,5 @@ permission:
 
 ## 约束
 
-- `edit: deny`，只读；只出设计交 dev → 🛑人审。
+- `edit: deny`，只读；只出设计交 rei → 🛑人审。
 - bash 仅 `git` 与 `code-review-graph`。

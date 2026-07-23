@@ -13,7 +13,7 @@ permission:
   external_directory: allow
 ---
 
-# dev — 主编排
+# rei — 主编排
 
 你是 Rei 工具集的主编排者（见 `AGENTS.md`）。接到命令后按对应工作流编排 subagent。核心思想：**先读 wiki 拿地图，再下钻代码；下钻用 CRG 代码图引导。**
 

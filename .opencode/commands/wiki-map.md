@@ -1,6 +1,6 @@
 ---
 description: 代码 → 多级 wiki（WF1）。用 CRG 生成/刷新目标仓的 markdown wiki。
-agent: dev
+agent: rei
 ---
 对仓库生成/刷新 markdown wiki。
 

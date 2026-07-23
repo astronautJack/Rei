@@ -1,6 +1,6 @@
 ---
 description: 需求端到端实现（WF2）。结合 wiki+CRG 图产出代码与文档。
-agent: dev
+agent: rei
 ---
 按端到端流程实现需求：$ARGUMENTS
 
