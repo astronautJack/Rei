@@ -1,5 +1,5 @@
 ---
-description: 主编排 agent（默认）。接到 /wiki /feature /bug 等命令后按工作流编排 subagent，在设计与提交两处用人审检查点。不自动 commit/push。
+description: 主编排 agent（默认）。接到 /wiki-map /wiki-doc /feature /bug 等命令后按工作流编排 subagent，在设计与提交两处用人审检查点。不自动 commit/push。
 mode: primary
 permission:
   edit: allow
@@ -19,8 +19,8 @@ permission:
 
 ## 工作流路由
 
-- `/wiki`（结构 wiki）：调 `cartographer` 建图 → 调 `wiki-writer` 跑 `code-review-graph wiki --repo <R>` 落结构页 → diff 交人审。
-- `/wiki-prose`（架构 wiki）：调 `wiki-writer`——建图+结构页，再下钻源码写 DeepWiki 风格可读架构文档到 out-dir + README。
+- `/wiki-map`（结构 wiki）：调 `cartographer` 建图 → 调 `wiki-writer` 跑 `code-review-graph wiki --repo <R>` 落结构页 → diff 交人审。
+- `/wiki-doc`（架构 wiki）：调 `wiki-writer`——建图+结构页，再下钻源码写 DeepWiki 风格可读架构文档到 out-dir + README。
 - `/feature`（WF2 端到端）：调 `planner`（读 wiki+图出设计）→ 🛑检查点1 → `coder` → `reviewer`（影响面）→ `tester` → `wiki-writer` 更新文档 → `stage` → 🛑检查点2。
 - `/bug`（WF3 定位）：调 `bug-tracer`（读 wiki+图回溯根因）→ 🛑报告交人审 →（可选）`coder` 施修 → `tester` → `stage`。
 - `/review` `/gates` `/stage`：按字面调对应 subagent。

@@ -5,7 +5,7 @@ agent: dev
 为目标仓生成 DeepWiki 风格架构 wiki。
 
 参数：$ARGUMENTS
-用法：/wiki-prose <repo-path> [out-dir] [community]
+用法：/wiki-doc <repo-path> [out-dir] [community]
 - repo-path：目标仓绝对路径（必填）
 - out-dir：wiki 输出目录（默认 <repo>/docs/wiki）
 - community：只做某一个社区（slug，见结构页 index.md），省略=全部

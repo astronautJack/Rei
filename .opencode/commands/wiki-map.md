@@ -5,7 +5,7 @@ agent: dev
 对仓库生成/刷新 markdown wiki。
 
 参数：$ARGUMENTS
-用法：/wiki <repo-path> [wiki-path]
+用法：/wiki-map <repo-path> [wiki-path]
 - repo-path：目标代码仓库绝对路径（必填）
 - wiki-path：wiki 根目录（默认 <repo>/docs/wiki）
 
