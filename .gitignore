@@ -8,8 +8,8 @@
 .code-review-graph/
 
 # 示例 wiki 产物（/wiki-map /wiki-doc 生成，可再生）
-avsession_wiki/
-avsession_wiki_prose/
+avsession_wiki_map/
+avsession_wiki_doc/
 
 # 编辑器 / OS / 日志（非 agent 设计）
 .vscode/
