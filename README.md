@@ -118,6 +118,7 @@ opencode
 - **CRG 副作用**：会在目标仓建 `.code-review-graph/`（图库 + 生成的 wiki）。建议加进该仓 `.gitignore`。
 - **wiki-writer 只在输出目录下写**，不碰仓库源码。
 - **CRG `wiki` 是纯结构、不调 LLM**；要拿能进知识库的可读架构文档用 `/wiki-doc`（wiki-writer 读源码自己写）。结构页有截断（Members 前 50、Flows 前 10），无参数可解。
+- **代码变化后更新 wiki**：结构页 `/wiki-map` 直接重跑（CRG `update` 增量图 + `wiki` 重生成 + diff 审，快）；散文架构档 `/wiki-doc` 按社区增量——读旧页 `last_sync_commit` → `git diff` 拿变化文件 → 映射社区 → 只重做受影响社区，未变的保留。传 `<community>` 强制单社区覆盖。
 - **重复操作某仓**：在该仓丢一个 mini `opencode.json`（设 `references.wiki` + `instructions` 指向该仓 `AGENTS.md`），工具集自动套用约定。
 - **DCP 上下文阈值**：默认 100K/50K 固定数字，按 ~128K 窗口调的。glm-5.2 窗口大，已在 `~/.config/opencode/dcp.jsonc` 改成百分比（`maxContextLimit:"75%"`、`minContextLimit:"45%"`），跟着真实窗口走。小窗口模型需再降。
 
