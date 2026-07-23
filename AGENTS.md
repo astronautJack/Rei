@@ -1,8 +1,8 @@
 # Rei — 代码↔Wiki / 端到端 / BUG 定位 工具集
 
-基于 opencode，对**任意路径**的本地代码仓库 + 多级 markdown wiki 提供三条能力（详见 `方案设计.md`）：
+基于 opencode，对**任意路径**的本地代码仓库 + 多级 markdown wiki 提供三条能力：
 
-1. 代码 → Wiki（`/wiki`）
+1. 代码 → Wiki（`/wiki` 结构页 / `/wiki-prose` 架构文档）
 2. 需求端到端实现（`/feature`）
 3. BUG 定位（`/bug`）
 
@@ -21,7 +21,7 @@ CRG 一身二任：当 **code_graph_review**（图 / blast-radius 影响面）+ 
 
 ## 用法
 
-- 命令以绝对路径接任意目标仓：`/wiki /path/to/repo /path/to/wiki`。
+- 命令以绝对路径接任意目标仓：`/wiki /path/to/repo /path/to/wiki`（结构页）；`/wiki-prose /path/to/repo /path/to/wiki`（DeepWiki 风格架构文档，wiki-writer 读源码写，可进知识库）。
 - CRG 常用子命令（都带 `--repo <R>`）：
   - `build` 建图 / `update` 增量 / `status` 统计
   - `detect-changes --brief` 影响面（reviewer/bug-tracer）
